@@ -1,0 +1,3 @@
+INFO     root:conftest.py:51 Тесты запускаются
+INFO     root:correction.py:25 Ошибок оплаты нет. Продолжаем выполнение теста.
+INFO     root:conftest.py:53 Тесты завершены
