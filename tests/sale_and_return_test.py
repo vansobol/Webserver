@@ -56,10 +56,10 @@ def test_sale_and_return(driver_setup):
     sale_return = driver.find_element(AppiumBy.XPATH, "//android.widget.TextView[@text='Возврат прихода']")
     sale_return.click()
     search_goods.search_product("БАНКОВСКИЙ АГЕНТ")
-    done = webdriver_helper.wait_present((AppiumBy.ID, 'com.bifit.cashdesk.mobile.webserver:id/fab_done'))
+    done = webdriver_helper.wait_present((AppiumBy.ID, 'com.bifit.cashdesk.mobile.webserver:id/doneButton'))
     done.click()
     time.sleep(1)
-    total = webdriver_helper.wait_present((AppiumBy.ID, 'com.bifit.cashdesk.mobile.webserver:id/button_continue'))
+    total = webdriver_helper.wait_present((AppiumBy.ID, 'com.bifit.cashdesk.mobile.webserver:id/totalButton'))
     total.click()
     pay_page.cash_payment()
 

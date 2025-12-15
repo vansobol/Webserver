@@ -15,9 +15,9 @@ class PayPage:
             text = error.text
             logging.info(text)
 
-        sno = self.webdriver_helper.wait_present((AppiumBy.ID, 'com.bifit.cashdesk.mobile.webserver:id/text_input_tax_system'))
+        sno = self.webdriver_helper.wait_present((AppiumBy.ID, 'com.bifit.cashdesk.mobile.webserver:id/snoTypeLayout'))
         sno.click()
-        sno_select = self.webdriver_helper.wait_visible((AppiumBy.XPATH, '//android.widget.ListView/android.widget.LinearLayout[1]'))
+        sno_select = self.webdriver_helper.wait_visible((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("УСН доход")'))
         sno_select.click()
         button_pay = self.webdriver_helper.wait_present((AppiumBy.ID, 'com.bifit.cashdesk.mobile.webserver:id/button_pay'))
         button_pay.click()

@@ -42,4 +42,5 @@ def test_reauthorization(driver_setup):
 
     authorization = Authorization(driver)
     authorization.select_organization_and_object()
+    time.sleep(1)
     webdriver_helper.tap(600, 600)
