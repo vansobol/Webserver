@@ -1,4 +1,7 @@
 import logging
+import time
+
+import pytest
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from appium.webdriver.common.appiumby import AppiumBy
 
@@ -24,15 +27,26 @@ class PayPage:
 
     def cash_payment(self):
         try:
-            without_change = self.webdriver_helper.wait_present((AppiumBy.XPATH, "//android.widget.Button[@text='Без сдачи']"))
+            without_change = self.webdriver_helper.wait_present((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Без сдачи")'))
             without_change.click()
-            sno = self.webdriver_helper.wait_present((AppiumBy.ID, 'com.bifit.cashdesk.mobile.webserver:id/text_input_tax_system'))
+            sno = self.webdriver_helper.wait_present((AppiumBy.ID, 'com.bifit.cashdesk.mobile.webserver:id/snoTypeLayout'))
             sno.click()
-            sno_select = self.webdriver_helper.wait_visible((AppiumBy.XPATH, '//android.widget.ListView/android.widget.LinearLayout[1]'))
+            sno_select = self.webdriver_helper.wait_visible((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("УСН доход")'))
             sno_select.click()
             button_pay = self.webdriver_helper.wait_clickable((AppiumBy.ID, 'com.bifit.cashdesk.mobile.webserver:id/button_pay'))
             button_pay.click()
+
         except Exception:
             error = self.webdriver_helper.wait_present((AppiumBy.ID, 'com.bifit.cashdesk.mobile.webserver:id/textView1'))
             text = error.text
             logging.info(text)
+
+    def check_error_pay(self):
+        try:
+            error = self.webdriver_helper.wait_present(
+                (AppiumBy.ID, 'com.bifit.cashdesk.mobile.webserver:id/textView1'))
+            text = error.text
+            logging.info(text)
+            pytest.fail(text)
+        except TimeoutException:
+            logging.info("Оплата прошла успешно")

@@ -44,6 +44,7 @@ class WebDriverHelper:
         K10_Y = 600
         self.tap(K10_X, K10_Y)
 
+
     def exists(self, locator, timeout=2):
         try:
             self.wait.until(EC.presence_of_element_located(locator))

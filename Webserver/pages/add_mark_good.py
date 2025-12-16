@@ -47,7 +47,7 @@ class AddMarkGood:
             logging.info(f"Сообщение об ошибке: {text}")
 
             # Закрытие всплывающего сообщения
-            close_button = self.webdriver_helper.middle_wait_clickable((AppiumBy.ID, 'com.bifit.cashdesk.mobile.webserver:id/closeBtn'))
+            close_button = self.webdriver_helper.wait_clickable((AppiumBy.ID, 'com.bifit.cashdesk.mobile.webserver:id/closeBtn'))
             close_button.click()
             logging.info("Закрыто сообщение об ошибке ЛМ ЧЗ")
         except (TimeoutException, NoSuchElementException):
@@ -55,19 +55,19 @@ class AddMarkGood:
 
         try:
             # Кнопка "Продолжить"
-            oism_button = self.webdriver_helper.middle_wait_present((AppiumBy.XPATH,'//android.widget.Button[@resource-id="com.bifit.cashdesk.mobile.webserver:id/button_continue" and @text="Далее"]'))
+            oism_button = self.webdriver_helper.wait_present((AppiumBy.XPATH,'//android.widget.Button[@resource-id="com.bifit.cashdesk.mobile.webserver:id/button_continue" and @text="Далее"]'))
             oism_button.click()
             logging.info("Кнопка Продолжить нажата")
 
         except (StaleElementReferenceException, TimeoutException, NoSuchElementException):
             # Пробуем найти "Удалить невалидные"
             try:
-                oism_button2 = self.webdriver_helper.middle_wait_present((AppiumBy.XPATH, '//android.widget.Button[@resource-id="com.bifit.cashdesk.mobile.webserver:id/button_continue" and @text="Удалить невалидные"]'))
+                oism_button2 = self.webdriver_helper.wait_present((AppiumBy.XPATH, '//android.widget.Button[@resource-id="com.bifit.cashdesk.mobile.webserver:id/button_continue" and @text="Удалить невалидные"]'))
                 oism_button2.click()
                 logging.info("Есть невалидные марки,нажата кнопка Удалить невалидные")
                 time.sleep(1)
 
-                input_field = self.webdriver_helper.middle_wait_present((AppiumBy.ANDROID_UIAUTOMATOR,'new UiSelector().resourceId("com.bifit.cashdesk.mobile.webserver:id/edit_text_mark")'))
+                input_field = self.webdriver_helper.wait_present((AppiumBy.ANDROID_UIAUTOMATOR,'new UiSelector().resourceId("com.bifit.cashdesk.mobile.webserver:id/edit_text_mark")'))
                 mark = "04601653035829H;dV)bFACVUdGVz"
                 input_field.send_keys(mark)
                 ActionChains(self.driver).send_keys(mark).send_keys(Keys.ENTER).perform()

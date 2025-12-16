@@ -22,3 +22,4 @@ def test_markirovka(driver_setup):
     total.click()
     add_mark_good.mark_check()
     pay_page.cash_payment()
+    pay_page.check_error_pay()

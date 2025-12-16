@@ -35,17 +35,17 @@ def driver_setup(request):
     yield driver, udid
     driver.quit()
 
-def pytest_configure():
-
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s [%(levelname)s] %(message)s',
-        handlers=[
-            logging.StreamHandler(),  # Вывод в консоль
-            logging.FileHandler("test_logs.log", mode='a',encoding='utf-8')  # Запись в файл
-        ]
-    )
-
+# def pytest_configure():
+#
+#     logging.basicConfig(
+#         level=logging.INFO,
+#         format='%(asctime)s [%(levelname)s] %(message)s',
+#         handlers=[
+#             logging.StreamHandler(),  # Вывод в консоль
+#             logging.FileHandler("test_logs.log", mode='a',encoding='utf-8')  # Запись в файл
+#         ]
+#     )
+#
 @pytest.fixture(scope="session", autouse=True)
 def setup_logging():
     # Этот фикстур выполняется для всех тестов и настраивает логирование

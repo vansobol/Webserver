@@ -90,7 +90,7 @@ class Authorization:
         except TimeoutException:
             logging.info("Список торговых объектов отсутствует. Продолжаем выполнение теста.")
 
-        # 3. Ожидание появления кнопки сайд-меню
+       # 3. Ожидание появления кнопки сайд-меню
         try:
             side_menu = self.helper.short_wait_present(
                 (AppiumBy.XPATH, "//android.view.ViewGroup/android.widget.ImageButton")
